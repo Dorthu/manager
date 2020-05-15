@@ -35,56 +35,70 @@ type CombinedProps = ContextProps &
 const LinodesDetailNavigation: React.StatelessComponent<CombinedProps> = props => {
   const {
     match: { url },
+    isMetal,
     linodeLabel,
     linodeConfigs,
     linodeId,
     linodeRegion,
     readOnly
   } = props;
+  console.log(props);
 
-  const tabs = [
+  const protoTabs = [
     /* NB: These must correspond to the routes inside the Switch */
     {
       routeName: `${url}/summary`,
-      title: 'Summary'
+      title: 'Summary',
+      show: true
     },
     {
       routeName: `${url}/volumes`,
-      title: 'Volumes'
+      title: 'Volumes',
+      show: !isMetal
     },
     {
       routeName: `${url}/networking`,
-      title: 'Networking'
+      title: 'Networking',
+      show: true
     },
     {
       routeName: `${url}/resize`,
-      title: 'Resize'
+      title: 'Resize',
+      show: !isMetal
     },
     {
       routeName: `${url}/rescue`,
-      title: 'Rescue'
+      title: 'Rescue',
+      show: !isMetal
     },
     {
       routeName: `${url}/rebuild`,
-      title: 'Rebuild'
+      title: 'Rebuild',
+      show: !isMetal
     },
     {
       routeName: `${url}/backup`,
-      title: 'Backups'
+      title: 'Backups',
+      show: !isMetal
     },
     {
       routeName: `${url}/activity`,
-      title: 'Activity'
+      title: 'Activity',
+      show: true
     },
     {
       routeName: `${url}/settings`,
-      title: 'Settings'
+      title: 'Settings',
+      show: true
     },
     {
       routeName: `${url}/advanced`,
-      title: 'Disks/Configs'
+      title: 'Disks/Configs',
+      show: !isMetal
     }
   ];
+
+  const tabs = protoTabs.filter((e, i, a) => e.show)
 
   const handleTabChange = (
     event: React.ChangeEvent<HTMLDivElement>,
@@ -107,7 +121,7 @@ const LinodesDetailNavigation: React.StatelessComponent<CombinedProps> = props =
           scrollButtons="on"
         >
           {tabs.map(tab => (
-            <Tab
+              <Tab
               key={tab.title}
               label={tab.title}
               data-qa-tab={tab.title}
@@ -216,6 +230,7 @@ const enhanced = compose<CombinedProps, {}>(
   withRouter,
   withLinodeDetailContext<ContextProps>(({ linode }) => ({
     linodeId: linode.id,
+    isMetal: linode.hypervisor == null,
     linodeConfigs: linode._configs,
     linodeLabel: linode.label,
     linodeRegion: linode.region,
