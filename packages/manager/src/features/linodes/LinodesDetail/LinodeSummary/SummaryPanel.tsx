@@ -82,6 +82,7 @@ class SummaryPanel extends React.Component<CombinedProps> {
   render() {
     const {
       classes,
+      isMetal,
       linodeTags,
       linodeId,
       linodeIpv4,
@@ -109,6 +110,7 @@ class SummaryPanel extends React.Component<CombinedProps> {
         <Paper className={classes.summarySection}>
           <LinodeNetSummary linodeId={linodeId} />
         </Paper>
+        { !isMetal &&
         <Paper className={classes.summarySection} style={{ paddingBottom: 24 }}>
           <Typography variant="h3" className={classes.title} data-qa-title>
             Last Backup
@@ -119,6 +121,7 @@ class SummaryPanel extends React.Component<CombinedProps> {
             mostRecentBackup={mostRecentBackup}
           />
         </Paper>
+        }
         <Paper className={classes.summarySection}>
           <Typography variant="h3" className={classes.title} data-qa-title>
             Tags
@@ -163,6 +166,7 @@ interface LinodeContextProps {
 }
 
 const linodeContext = withLinodeDetailContext(({ linode }) => ({
+  isMetal: linode.hypervisor == null,
   linodeIpv4: linode.ipv4,
   linodeIpv6: linode.ipv6,
   linodeRegion: linode.region,

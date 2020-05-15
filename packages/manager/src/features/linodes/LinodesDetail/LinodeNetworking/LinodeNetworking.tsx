@@ -551,7 +551,7 @@ class LinodeNetworking extends React.Component<CombinedProps, State> {
 
         {this.renderIPv6()}
 
-        {this.renderNetworkActions()}
+        {this.props.linode.hypervisor != null && this.renderNetworkActions()}
 
         <ViewIPDrawer
           open={this.state.viewIPDrawerOpen}

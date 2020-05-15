@@ -459,6 +459,7 @@ export class LinodeSummary extends React.Component<CombinedProps, State> {
                   <span className={classes.headerOuter}>
                     <span>{newLabel}</span>
                     <span className={`py0 ${classes.subHeaderOuter}`}>
+                      { linode.hypervisor != null &&
                       <span className={classes.textWrap}>
                         Volumes:&#160;
                         {linodeVolumesError ? (
@@ -469,7 +470,7 @@ export class LinodeSummary extends React.Component<CombinedProps, State> {
                           </Link>
                         )}
                         ,&#160;
-                      </span>
+                      </span> }
                       <span className={classes.textWrap}>
                         Region: {formatRegion(linode.region)}
                       </span>
@@ -488,6 +489,7 @@ export class LinodeSummary extends React.Component<CombinedProps, State> {
               />
             </Grid>
 
+            { linode.hypervisor != null && <>
             <Grid item className="py0">
               <div className={classes.graphControls}>
                 <Select
@@ -524,6 +526,7 @@ export class LinodeSummary extends React.Component<CombinedProps, State> {
               renderBody={this.renderDiskIOChart}
               {...chartProps}
             />
+            </> }
           </Grid>
           <Grid item xs={12} md={4} lg={3} className={classes.sidebar}>
             <SummaryPanel />
