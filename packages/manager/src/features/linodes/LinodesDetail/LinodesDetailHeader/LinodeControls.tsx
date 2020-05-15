@@ -146,6 +146,7 @@ const LinodeControls: React.StatelessComponent<CombinedProps> = props => {
         </Button>
         <LinodePowerControl
           status={linode.status}
+          isMetal={linode.hypervisor == null}
           linodeEvents={linode._events}
           id={linode.id}
           label={linode.label}

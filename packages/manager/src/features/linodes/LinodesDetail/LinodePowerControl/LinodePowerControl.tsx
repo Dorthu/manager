@@ -166,14 +166,16 @@ export class LinodePowerButton extends React.Component<CombinedProps, State> {
       status,
       classes,
       disabled,
+      isMetal,
       linodeEvents,
       linodeConfigs
     } = this.props;
+
     const {
       menu: { anchorEl }
     } = this.state;
 
-    const hasNoConfigs = linodeConfigs.length === 0;
+    const hasNoConfigs = !isMetal && linodeConfigs.length === 0;
 
     const firstEventWithPercent = (linodeEvents || []).find(
       eachEvent => typeof eachEvent.percent_complete === 'number'
