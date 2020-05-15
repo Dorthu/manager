@@ -245,8 +245,17 @@ class LinodeCreateContainer extends React.PureComponent<CombinedProps, State> {
   setRegionID = (id: string) => this.setState({ selectedRegionID: id });
 
   setTypeID = (id: string) => {
-    // wsmith TODO - hide backups-related components
     this.setState({ selectedTypeID: id });
+
+    if(/metal/.test(id)) {
+        // disable addons like backups for bare metal instances
+        this.setState({
+            blockMetalExtras: true,
+            backupsEnabled: false,
+        })
+    } else {
+        this.setState({ blockMetalExtras: false})
+    }
   };
 
   setLinodeID = (id: number, diskSize?: number) => {
@@ -636,7 +645,8 @@ const mapStateToProps: MapState<
    */
   userCannotCreateLinode:
     isRestrictedUser(state) && !hasGrant(state, 'add_linodes'),
-  createType: state.createLinode.type
+  createType: state.createLinode.type,
+  blockMetalExtras: false
 });
 
 interface DispatchProps {

@@ -113,7 +113,8 @@ export class FromImageContent extends React.PureComponent<CombinedProps> {
       errors,
       imagePanelTitle,
       showGeneralError,
-      variant
+      variant,
+      blockMetalExtras
     } = this.props;
 
     const hasBackups = this.props.backupsEnabled || accountBackupsEnabled;
@@ -289,7 +290,7 @@ export class FromImageContent extends React.PureComponent<CombinedProps> {
                 this.props.backupsEnabled,
                 this.props.selectedTypeID
               ]}
-              disabled={userCannotCreateLinode}
+              disabled={userCannotCreateLinode || blockMetalExtras}
             />
           </form>
         </Grid>
