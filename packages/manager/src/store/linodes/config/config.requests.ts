@@ -78,6 +78,13 @@ export const getAllLinodeConfigs: ThunkActionCreator<
     dispatch(done({ params, result: data.map(addLinodeIdToConfig(linodeId)) }));
     return data;
   } catch (error) {
+    console.log(error);
+    if (error[0].reason == "This operation is not supported for Bare Metal Instances.") {
+        console.log("caught error");
+        dispatch(done({ params, result: [] }));
+        return [];
+    }
+    console.log("didnt caught error");
     dispatch(failed({ params, error }));
     return error;
   }

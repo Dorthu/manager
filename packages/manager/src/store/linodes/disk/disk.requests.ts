@@ -78,6 +78,13 @@ export const getAllLinodeDisks: ThunkActionCreator<
     dispatch(done({ params, result: data.map(addLinodeIdToDisk(linodeId)) }));
     return data;
   } catch (error) {
+    console.log(error);
+    if (error[0].reason == "This operation is not supported for Bare Metal Instances.") {
+        console.log("caught error");
+        dispatch(done({ params, result: [] }));
+        return [];
+    }
+    console.log("didn't caught errror");
     dispatch(failed({ params, error }));
     return error;
   }
