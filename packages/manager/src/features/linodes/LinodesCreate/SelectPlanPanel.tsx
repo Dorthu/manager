@@ -103,6 +103,9 @@ const getDedicated = (types: ExtendedType[]) =>
 const getGPU = (types: ExtendedType[]) =>
   types.filter(t => /gpu/.test(t.class));
 
+const getMetal = (types: ExtendedType[]) =>
+  types.filter(t => /metal/.test(t.class));
+
 export class SelectPlanPanel extends React.Component<
   Props & WithStyles<ClassNames>
 > {
@@ -260,6 +263,7 @@ export class SelectPlanPanel extends React.Component<
     const highmem = getHighMem(types);
     const dedicated = getDedicated(types);
     const gpu = getGPU(types);
+    const metal = getMetal(types);
 
     const tabOrder: LinodeTypeClass[] = [];
 
@@ -372,6 +376,26 @@ export class SelectPlanPanel extends React.Component<
       tabOrder.push('gpu');
     }
 
+    if (!isEmpty(metal)) {
+      tabs.push({
+        render: () => {
+          return (
+            <>
+              <Typography data-qa-metal className={classes.copy}>
+                Bare Metal Instances are a new, super-securet, in-development
+                Linode type that we're working on right now! If you can see
+                this, you must be in the alpha! Please share, we only have a
+                couple dozen machines in the alpha program!
+              </Typography>
+              {this.renderPlanContainer(metal)}
+            </>
+          );
+        },
+        title: 'Bare Metal'
+      });
+      tabOrder.push('metal');
+    }
+
     return [tabs, tabOrder];
   };
 
@@ -390,7 +414,7 @@ export class SelectPlanPanel extends React.Component<
     // Determine initial plan category tab based on current plan selection
     // (if there is one).
     const selectedTypeClass: LinodeTypeClass = pathOr(
-      'standard', // Use `standard` by default
+      'metal', // Use `metal` by default - that's what we're showing off here!
       ['class'],
       types.find(type => type.heading === currentPlanHeading)
     );

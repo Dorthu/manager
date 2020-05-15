@@ -244,7 +244,10 @@ class LinodeCreateContainer extends React.PureComponent<CombinedProps, State> {
 
   setRegionID = (id: string) => this.setState({ selectedRegionID: id });
 
-  setTypeID = (id: string) => this.setState({ selectedTypeID: id });
+  setTypeID = (id: string) => {
+    // wsmith TODO - hide backups-related components
+    this.setState({ selectedTypeID: id });
+  };
 
   setLinodeID = (id: number, diskSize?: number) => {
     if (id !== this.state.selectedLinodeID) {
