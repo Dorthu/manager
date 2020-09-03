@@ -58,12 +58,12 @@ const LinodeSettings: React.StatelessComponent<CombinedProps> = props => {
               Settings
             </Typography>
             <LinodeSettingsLabelPanel />
-            { linode.hypervisor != null &&
             <LinodeSettingsPasswordPanel
               linodeLabel={linode.label}
               linodeId={linode.id}
               linodeStatus={linode.status}
-            /> }
+              isMetal={linode.hypervisor != null}
+            />
             { linode.hypervisor != null &&
             <LinodeSettingsAlertsPanel
               linodeId={linode.id}

@@ -382,7 +382,7 @@ export class SelectPlanPanel extends React.Component<
           return (
             <>
               <Typography data-qa-metal className={classes.copy}>
-                Bare Metal Instances are a new, super-securet, in-development
+                Bare Metal Instances are a new, super-secret, in-development
                 Linode type that we're working on right now! If you can see
                 this, you must be in the alpha! Please share, we only have a
                 couple dozen machines in the alpha program!

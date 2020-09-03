@@ -163,6 +163,7 @@ interface LinodeContextProps {
   linodeVolumesError?: APIError[];
   backupsEnabled: boolean;
   readOnly: boolean;
+  isMetal?: boolean;
 }
 
 const linodeContext = withLinodeDetailContext(({ linode }) => ({

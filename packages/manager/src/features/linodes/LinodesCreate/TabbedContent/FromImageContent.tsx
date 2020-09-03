@@ -54,6 +54,7 @@ interface Props extends BaseFormStateAndHandlers {
   variant?: 'public' | 'private' | 'all';
   imagePanelTitle?: string;
   showGeneralError?: boolean;
+  blockMetalExtras?: boolean;
 }
 
 const errorMap = [

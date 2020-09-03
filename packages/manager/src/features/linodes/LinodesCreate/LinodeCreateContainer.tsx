@@ -100,6 +100,7 @@ interface State {
   appInstances?: StackScript[];
   appInstancesLoading: boolean;
   appInstancesError?: string;
+  blockMetalExtras: boolean;
 }
 
 type CombinedProps = WithSnackbarProps &
@@ -133,7 +134,8 @@ const defaultState: State = {
   tags: [],
   formIsSubmitting: false,
   errors: undefined,
-  appInstancesLoading: false
+  appInstancesLoading: false,
+  blockMetalExtras: false
 };
 
 const trimOneClickFromLabel = (script: StackScript) => {

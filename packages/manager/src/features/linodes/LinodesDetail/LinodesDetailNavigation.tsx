@@ -74,7 +74,7 @@ const LinodesDetailNavigation: React.StatelessComponent<CombinedProps> = props =
     {
       routeName: `${url}/rebuild`,
       title: 'Rebuild',
-      show: !isMetal
+      show: true
     },
     {
       routeName: `${url}/backup`,
@@ -224,6 +224,7 @@ interface ContextProps {
   linodeLabel: string;
   linodeRegion: string;
   readOnly: boolean;
+  isMetal?: boolean;
 }
 
 const enhanced = compose<CombinedProps, {}>(

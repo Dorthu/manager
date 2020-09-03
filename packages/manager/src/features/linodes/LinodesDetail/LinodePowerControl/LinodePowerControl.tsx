@@ -113,6 +113,7 @@ interface Props {
   disabled?: boolean;
   linodeEvents?: Event[];
   linodeConfigs: Config[];
+  isMetal?: boolean;
 }
 
 interface State {
