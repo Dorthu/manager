@@ -42,7 +42,6 @@ const LinodesDetailNavigation: React.StatelessComponent<CombinedProps> = props =
     linodeRegion,
     readOnly
   } = props;
-  console.log(props);
 
   const protoTabs = [
     /* NB: These must correspond to the routes inside the Switch */

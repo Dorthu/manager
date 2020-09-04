@@ -31,6 +31,7 @@ const styles = (theme: Theme) =>
 interface ContextProps {
   linodeLabel: string;
   permissions: GrantLevel;
+  isMetal: boolean;
 }
 type CombinedProps = WithStyles<ClassNames> & ContextProps;
 
@@ -43,9 +44,12 @@ const options = [
   { value: 'fromCommunityStackScript', label: 'From Community StackScript' },
   { value: 'fromAccountStackScript', label: 'From Account StackScript' }
 ];
+const metalOptions = [
+  { value: 'fromImage', label: 'From Image' }
+];
 
 const LinodeRebuild: React.StatelessComponent<CombinedProps> = props => {
-  const { classes, linodeLabel, permissions } = props;
+  const { classes, linodeLabel, permissions, isMetal } = props;
   const disabled = permissions === 'read_only';
 
   const [mode, setMode] = React.useState<MODES>('fromImage');
@@ -71,8 +75,8 @@ const LinodeRebuild: React.StatelessComponent<CombinedProps> = props => {
           Rebuilding will destroy all data on all existing disks on this Linode.
         </Typography>
         <EnhancedSelect
-          options={options}
-          defaultValue={options[0]}
+          options={isMetal ? metalOptions : options}
+          defaultValue={isMetal ? metalOptions[0] : options[0]}
           onChange={(selected: Item<MODES>) => setMode(selected.value)}
           isClearable={false}
           disabled={disabled}
@@ -93,7 +97,8 @@ const LinodeRebuild: React.StatelessComponent<CombinedProps> = props => {
 
 const linodeContext = withLinodeDetailContext(({ linode }) => ({
   linodeLabel: linode.label,
-  permissions: linode._permissions
+  permissions: linode._permissions,
+  isMetal: linode.hypervisor == null
 }));
 
 const styled = withStyles(styles);
