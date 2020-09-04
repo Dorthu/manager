@@ -160,7 +160,12 @@ class LinodeSettingsPasswordPanel extends React.Component<
   };
 
   searchDisks = (value: string = '') => {
-    if (this.props.isMetal) { return; }
+    console.log(this.props);
+    if (this.props.isMetal) {
+        this.setState({disks: [], disksLoading: false});
+        return;
+    }
+
     if (this.state.disksLoading === false) {
       this.setState({ disksLoading: true });
     }

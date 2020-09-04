@@ -120,7 +120,7 @@ export const deleteLinode = (linodeId: number) =>
 
 export const changeLinodePassword = (linodeId: number, password: string) =>
     Request<{}>(
-        setURL(`${API_ROOT}/linode/instances/${linodeId}`),
-        SetMethod('POST'),
-        Setdata({password})
+        setURL(`${API_ROOT}/linode/instances/${linodeId}/password`),
+        setMethod('POST'),
+        setData({root_pass: password})
     );
