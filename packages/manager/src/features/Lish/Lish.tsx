@@ -208,7 +208,16 @@ class Lish extends React.Component<CombinedProps, State> {
 
   renderWeblish = () => {
     const { linode, token } = this.state;
+
     if (linode && token) {
+      if(linode.hypervisor == null) {
+          this.tabs = [
+            /* NB: These must correspond to the routes inside the Switch */
+            /* No glish here since this is a bare metal instance */
+            { routeName: `${this.props.match.url}/weblish`, title: 'Weblish' },
+          ];
+      }
+
       return (
         <Weblish
           token={token}
@@ -222,7 +231,7 @@ class Lish extends React.Component<CombinedProps, State> {
 
   renderGlish = () => {
     const { linode, token } = this.state;
-    if (linode && token) {
+    if (linode && linode.hypervisor != null && token) {
       return (
         <Glish token={token} linode={linode} refreshToken={this.refreshToken} />
       );
